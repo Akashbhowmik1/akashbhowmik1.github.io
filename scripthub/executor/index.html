@@ -1484,12 +1484,9 @@ Please wait ${data.retry_after || 30} seconds and try again.`;
     }
 
     // API returned something, but it isn't a URL
-    if (result) {
-      console.log("⚠️ API returned non-URL result:", result);
-
-      return `API returned a result, but it isn't a direct URL:
-${result}`;
-    }
+   if (result) {
+  return result;
+}
 
     return "Error: API returned no usable result.";
 
