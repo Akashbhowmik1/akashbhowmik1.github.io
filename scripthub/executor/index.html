@@ -1393,98 +1393,112 @@
   };
 
   const clearChat = () => { if (chatHistory.length === 0 || confirm('Clear all chat history?')) { chatHistory = []; const key = getChatKey(); if (key) localStorage.removeItem(key); renderChatHistory(); } };
-  const bypassLink = async (link) => {
-    try {
-      const resp = await fetch(`${API_ENDPOINT}?url=${encodeURIComponent(link.trim())}`, { method: 'GET', mode: 'cors', cache: 'no-store' });
+ const bypassLink = async (link) => {
+  try {
+    const resp = await fetch(
+      `${API_ENDPOINT}?url=${encodeURIComponent(link.trim())}`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-store'
+      }
+    );
+
     let data;
 
-try {
-  data = await resp.json();
-  console.log("✅ API RESPONSE:", data);
-} catch (e) {
-  console.error("❌ JSON ERROR:", e);
-  return "Error: Invalid API response.";
-}
+    try {
+      data = await resp.json();
 
-if (resp.status === 429) {
-  return `⏳ Rate Limit Reached\n\nYou have used your 1 bypasses for this minute.\nPlease wait ${data.retry_after} seconds and try again.`;
-}
+      console.log("✅ API RESPONSE:", data);
+      console.log("RESULT:", data.result);
+      console.log("SOURCE:", data.source);
+      console.log("SUCCESS:", data.success);
+      console.log("FULL RESPONSE:", JSON.stringify(data, null, 2));
 
-if (!resp.ok) {
-  throw new Error(`HTTP ${resp.status}`);
-}
-     
-let result = null;
-
-// Direct string response
-if (typeof data === "string") {
-  result = data;
-}
-
-// Object response
-if (!result && typeof data === "object") {
-  // Try common keys
-  result =
-    data.result ||
-    data.url ||
-    data.bypassed ||
-    data.destination ||
-    data.key ||
-    data.final ||
-    data.data ||
-    data.direct_url ||
-    data.link ||
-    data.success ||
-    data.output;
-
-  // Deep scan ALL values
-  if (!result) {
-    for (const key in data) {
-      if (typeof data[key] === "string" && data[key].startsWith("http")) {
-        result = data[key];
-        break;
-      }
+    } catch (e) {
+      console.error("❌ JSON ERROR:", e);
+      return "Error: Invalid API response.";
     }
+
+    if (resp.status === 429) {
+      return `⏳ Rate Limit Reached
+
+Please wait ${data.retry_after || 30} seconds and try again.`;
+    }
+
+    if (!resp.ok) {
+      return `Error: API returned HTTP ${resp.status}.`;
+    }
+
+    if (data.success === false) {
+      return `Error: ${data.error || data.message || "API failed to process the link."}`;
+    }
+
+    let result = null;
+
+    if (typeof data === "string") {
+      result = data;
+    } else if (data && typeof data === "object") {
+      result =
+        data.result ||
+        data.url ||
+        data.bypassed ||
+        data.destination ||
+        data.final ||
+        data.direct_url ||
+        data.link ||
+        null;
+    }
+
+    // Look inside nested objects for a URL
+    if (!result && data && typeof data === "object") {
+      const findUrl = (obj) => {
+        if (!obj || typeof obj !== "object") return null;
+
+        for (const value of Object.values(obj)) {
+          if (
+            typeof value === "string" &&
+            /^https?:\/\//i.test(value.trim())
+          ) {
+            return value.trim();
+          }
+
+          if (value && typeof value === "object") {
+            const found = findUrl(value);
+            if (found) return found;
+          }
+        }
+
+        return null;
+      };
+
+      result = findUrl(data);
+    }
+
+    // Only accept an actual URL as a direct link
+    if (
+      typeof result === "string" &&
+      /^https?:\/\//i.test(result.trim())
+    ) {
+      return `Bypassed! 🎉\nDirect link: ${result.trim()}`;
+    }
+
+    // API returned something, but it isn't a URL
+    if (result) {
+      console.log("⚠️ API returned non-URL result:", result);
+
+      return `API returned a result, but it isn't a direct URL:
+${result}`;
+    }
+
+    return "Error: API returned no usable result.";
+
+  } catch (err) {
+    console.error("❌ BYPASS ERROR:", err);
+
+    return `Error: ${err?.message || "Request failed."}`;
   }
-}
-
-// FINAL fallback: regex scan FULL response
-if (!result) {
-  const raw = JSON.stringify(data);
-  const match = raw.match(/https?:\/\/[^\s"']+/);
-  if (match) result = match[0];
-}
-
-// Handle ALL possible API formats
-if (typeof data === "string") {
-  result = data;
-} else {
-  result =
-    data.result ||
-    data.url ||
-    data.bypassed ||
-    data.destination ||
-    data.key ||
-    data.final ||
-    data.data ||
-    data.direct_url ||
-    null;
-}
-
-// Last fallback (extract any URL from response)
-if (!result) {
-  const match = JSON.stringify(data).match(/https?:\/\/[^\s"']+/);
-  if (match) result = match[0];
-}
-
-// Final validation
-if (result && typeof result === "string" && result.length > 5) {
-  return `Bypassed! 🎉\nDirect link: ${result}`;
-} else {
-  return "Error: Unsupported or invalid link. Please try another.";
-}
-    } catch (err) { return 'Error: Unsupported or invalid link. Please try another.'; }
-  };
+};
 
   const handleSend = async () => {
     if (!currentUser) return;
