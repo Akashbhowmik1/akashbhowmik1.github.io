@@ -1427,7 +1427,8 @@ Please wait ${data.retry_after || 30} seconds and try again.`;
     }
 
     if (!resp.ok) {
-      return `Try again to to bypass.`;
+     
+      return `Try again or unsupported link  {resp.status}.`;
     }
 
     if (data.success === false) {
