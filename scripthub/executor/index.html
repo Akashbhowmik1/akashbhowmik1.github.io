@@ -1505,9 +1505,9 @@ Please wait ${data.retry_after || 30} seconds and try again.`;
     }
 
     // API returned something, but it isn't a URL
-   if (result) {
-  return result;
-}
+    if (result) {
+      return `Bypassed! 🎉\nResult: ${result.trim()}`;
+    }
 
     return "Error: API returned no usable result.";
 
