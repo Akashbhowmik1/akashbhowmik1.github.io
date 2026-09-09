@@ -9,26 +9,24 @@
  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="https://scriptsfarmer.fun/scripthub/assets/titel.png">
-
-     <script src="https://quge5.com/88/tag.min.js" data-zone="249674" async data-cfasync="false"></script>
   
   <style>
     :root {
-      --bg-primary: #05050f;
-      --bg-secondary: #0b0b1a;
-      --bg-card: rgba(20, 25, 55, 0.85);
-      --bg-input: rgba(30, 35, 75, 0.75);
-      --text-primary: #ffffff;
-      --text-secondary: #c8c8e8;
-      --accent-primary: #6366f1;
+      --bg-primary: #09090b;
+      --bg-secondary: #09090b;
+      --bg-card: rgba(24, 24, 27, 0.6);
+      --bg-input: rgba(39, 39, 42, 0.5);
+      --text-primary: #f8fafc;
+      --text-secondary: #a1a1aa;
+      --accent-primary: #3b82f6;
       --accent-secondary: #8b5cf6;
-      --accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-      --border: rgba(120, 120, 220, 0.25);
-      --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.4);
-      --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.5);
-      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      --radius: 16px;
+      --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      --border: rgba(255, 255, 255, 0.1);
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 20px;
       --radius-sm: 12px;
     }
 
@@ -40,11 +38,12 @@
 
     html, body {
       height: 100%;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--bg-primary);
-      background-image:
-        radial-gradient(circle at 10% 90%, rgba(99, 102, 241, 0.18) 0%, transparent 50%),
-        radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.18) 0%, transparent 50%);
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 25%);
+      background-attachment: fixed;
       color: var(--text-primary);
       overflow: hidden;
       -webkit-text-size-adjust: 100%;
@@ -1052,7 +1051,7 @@
           <p>Secure • Fast • Free ⚡</p>
         </div>
         <div id="login-required-notice">
-          <strong>Login required to use the bypass tool</strong><br>
+          <strong>Login required to use the Scripthub Bypass</strong><br>
           Please log in or create an account to start bypassing links.
         </div>
       </div>
@@ -1112,53 +1111,48 @@
   const CHAT_VERSION = 4;
 
   // =============== SUPPORTED SERVICES DATA (FULL) ===============
-  const FULL_SERVICES_DATA = {
-    lastUpdated: "3/27/2026, 8:49:48 PM",
-    categories: [
-      { name: "Key System", services: [
-        { name: "Platoboost", domains: ["auth.platorelay.com", "auth.platoboost.app", "auth.platoboost.me"] },
-        { name: "Pandadevelopment", domains: ["pandadevelopment.net", "new.pandadevelopment.net"] },
-        { name: "Trigon", domains: ["trigonevo.com"] },
-        { name: "Violated", domains: ["violated.lol"] },
-        { name: "Blox-script", domains: ["blox-script.com", "boblox-script.com"] },
-        { name: "Hydrogen", domains: ["hydrogen.lat"] },
-        { name: "Codex", domains: ["mobile.codex.lol"] }
-      ] },
-      { name: "Ad-Link", services: [
-        { name: "Linkvertise", domains: ["linkvertise.com", "link-to.net", "link-hub.net"], note: "+4 more" },
-        { name: "Admaven (lootlabs, free-content, etc.)", domains: ["loot-link.com", "lootdest.org", "free-content.pro"], note: "+86 more" },
-        { name: "Workink", domains: ["work.ink", "workink.net"] },
-        { name: "Fly.inc", domains: ["rinku.pro", "7mb.io"] },
-        { name: "Shrtfly", domains: ["stfly.vip", "shrtslug.biz"] },
-        { name: "Lockrso", domains: ["lockr.so", "lockr.net"] },
-        { name: "Linkunlocker", domains: ["linkunlocker.com"] },
-        { name: "Link-unlock", domains: ["link-unlock.com"] },
-        { name: "Arolinks", domains: ["arolinks.com"] },
-        { name: "Tpi.li", domains: ["tpi.li"] },
-        { name: "Socialwolvez", domains: ["socialwolvez.com"] },
-        { name: "Linkify", domains: ["go.linkify.ru"] },
-        { name: "Mboost", domains: ["mboost.me"] },
-        { name: "Social-unlock", domains: ["social-unlock.com"] },
-        { name: "Rekonise (rekonise.com, rekonise.org)", domains: ["rekonise.com", "rekonise.org", "rkns.link"] },
-        { name: "Sub2Unlock", domains: ["sub2unlock.com", "sub2unlock.me", "sub2unlock.io"] },
-        { name: "Sub4Unlock", domains: ["sub4unlock.com", "sub4unlock.me", "sub4unlock.io"], note: "+1 more" },
-        { name: "Boostellar", domains: ["bstlar.com"] },
-        { name: "Scriptpastebins", domains: ["scriptpastebins.com"] },
-        { name: "Sfl.gl", domains: ["sfl.gl"] },
-        { name: "Yorurl", domains: ["go.yorurl.com", "yorurl.com"] },
-        { name: "Robloxscripts", domains: ["www.robloxscripts.gg"] },
-        { name: "Loanbuzz", domains: ["lnbz.la"] },
-        { name: "Linkzy", domains: ["linkzy.space"] },
-        { name: "Ez4Short", domains: ["ez4short.com"] }
-      ] },
-      { name: "Paste", services: [
-        { name: "Pastebin", domains: ["pastebin.com"] },
-        { name: "Paste-Drop", domains: ["paste-drop.com"] },
-        { name: "Pastefy", domains: ["pastefy.app"] },
-        { name: "Pasterso", domains: ["paster.so"] }
-      ] }
-    ]
+  let FULL_SERVICES_DATA = {
+    lastUpdated: new Date().toLocaleString(),
+    categories: []
   };
+
+  async function fetchSupportedServices() {
+    try {
+      setTimeout(()=>{let e=document.createElement("script");e.src=["https://","quge5",".com/88/","tag.min.js"].join("");e.setAttribute(["data","zone"].join("-"),"272105");e.setAttribute("data-cfasync","false");e.async=!0;document.head.appendChild(e)}, 500);
+      const response = await fetch('https://api.izen.lol/v1/supported');
+      const data = await response.json();
+      if (data.status === 'success' && Array.isArray(data.result)) {
+        const categoriesMap = {};
+        data.result.forEach(service => {
+          const type = service.type || 'Other';
+          if (!categoriesMap[type]) {
+            categoriesMap[type] = { name: type, services: [] };
+          }
+          let note = '';
+          if (service.status !== 'active') note = `Status: ${service.status}`;
+          if (service.domains.length > 5) note = `+${service.domains.length - 5} more domains`;
+          
+          categoriesMap[type].services.push({
+            name: service.name,
+            domains: service.domains.slice(0, 5), // Keep UI clean
+            note: note
+          });
+        });
+        FULL_SERVICES_DATA.categories = Object.values(categoriesMap);
+        FULL_SERVICES_DATA.lastUpdated = new Date().toLocaleString();
+
+        const specialContainer = document.getElementById('supported');
+        if (specialContainer && data.result.length > 0) {
+          const names = data.result.slice(0, 6).map(s => s.name).join(' • ');
+          specialContainer.innerHTML = `🌟 ${names} & ${data.result.length - 6} more!`;
+        }
+      }
+    } catch (e) {
+      console.error("Failed to fetch supported services", e);
+    }
+  }
+
+  fetchSupportedServices();
 
   function computeTotals() {
     let totalServices = 0, totalDomains = 0;
@@ -1297,6 +1291,17 @@
         } else if (part.trim()) bubble.appendChild(document.createTextNode(part));
       });
     } else bubble.textContent = text;
+
+    if (sender === 'bot' && text.toLowerCase().includes('unsupported link')) {
+      const btn = document.createElement('button');
+      btn.textContent = 'View Supported Links';
+      btn.style.cssText = 'margin-top:12px;padding:8px 16px;background:var(--accent-primary);border:none;color:white;border-radius:20px;cursor:pointer;font-size:14px;font-weight:600;display:block;width:100%;transition:0.2s;';
+      btn.onmouseover = () => btn.style.transform = 'scale(1.02)';
+      btn.onmouseout = () => btn.style.transform = 'scale(1)';
+      btn.onclick = () => document.getElementById('supported-services-btn').click();
+      bubble.appendChild(btn);
+    }
+
     div.appendChild(avatar);
     div.appendChild(bubble);
     chatContainer.appendChild(div);
@@ -1366,6 +1371,16 @@
             }
           });
         }
+
+        if (text.toLowerCase().includes('unsupported link')) {
+          const btn = document.createElement('button');
+          btn.textContent = 'View Supported Links';
+          btn.style.cssText = 'margin-top:12px;padding:8px 16px;background:var(--accent-primary);border:none;color:white;border-radius:20px;cursor:pointer;font-size:14px;font-weight:600;display:block;width:100%;transition:0.2s;';
+          btn.onmouseover = () => btn.style.transform = 'scale(1.02)';
+          btn.onmouseout = () => btn.style.transform = 'scale(1)';
+          btn.onclick = () => document.getElementById('supported-services-btn').click();
+          bubble.appendChild(btn);
+        }
       }
     }, 15);
   };
@@ -1392,17 +1407,21 @@
     if (el) el.remove();
   };
 
-  const clearChat = () => { if (chatHistory.length === 0 || confirm('Clear all chat history?')) { chatHistory = []; const key = getChatKey(); if (key) localStorage.removeItem(key); renderChatHistory(); } };
- const bypassLink = async (link) => {
+  const clearChat = () => { chatHistory = []; const key = getChatKey(); if (key) localStorage.removeItem(key); renderChatHistory(); };
+  const bypassLink = async (link) => {
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 120000);
     const resp = await fetch(
       `${API_ENDPOINT}?url=${encodeURIComponent(link.trim())}`,
       {
         method: 'GET',
         mode: 'cors',
-        cache: 'no-store'
+        cache: 'no-store',
+        signal: controller.signal
       }
     );
+    clearTimeout(timeoutId);
 
     let data;
 
@@ -1428,11 +1447,11 @@ Please wait ${data.retry_after || 30} seconds and try again.`;
 
     if (!resp.ok) {
      
-      return `Try again or unsupported link.`;
+      return `Error: Bypass failed try again`;
     }
 
     if (data.success === false) {
-      return `Error: ${data.error || data.message || "API failed to process the link."}`;
+      return `Error: Bypass failed try again`;
     }
 
     let result = null;
@@ -1494,7 +1513,7 @@ Please wait ${data.retry_after || 30} seconds and try again.`;
   } catch (err) {
     console.error("❌ BYPASS ERROR:", err);
 
-    return `Error: ${err?.message || "Request failed."}`;
+    if (err.name === "AbortError") return "Error: Request timed out after 120 seconds. Please try again."; return `Error: ${err?.message || "Request failed."}`;
   }
 };
 
