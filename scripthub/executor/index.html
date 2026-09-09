@@ -1446,12 +1446,13 @@ Please wait ${data.retry_after || 30} seconds and try again.`;
     }
 
     if (!resp.ok) {
-     
-      return `Error: Bypass failed try again`;
+      let errorMsg = (data && (data.error || data.message)) || "Bypass failed try again";
+      return `Error: ${errorMsg}`;
     }
 
     if (data.success === false) {
-      return `Error: Bypass failed try again`;
+      let errorMsg = (data && (data.error || data.message)) || "Bypass failed try again";
+      return `Error: ${errorMsg}`;
     }
 
     let result = null;
